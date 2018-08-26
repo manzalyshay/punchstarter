@@ -44,9 +44,14 @@ class Migration_Create_projects extends CI_Migration {
                 'type' => 'VARCHAR',
                 'constraint' => '100',
             ),
-            'order' => array(
-                'type' => 'INT',
-                'constraint' => '100',
+            'pubdate' => array(
+                'type' => 'DATE'
+            ),
+            'modified' => array(
+                'type' => 'DATETIME'
+            ),
+            'created' => array(
+                'type' => 'DATETIME'
             ),
             'body' => array(
                 'type' => 'TEXT',

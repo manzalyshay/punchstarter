@@ -15,6 +15,8 @@ class User extends Admin_Controller{
     {
         parent::__construct();
         $this->dashboard = 'admin/dashboard';
+        $this->creatordashboard = 'admin_creator/dashboard';
+
         $this->userlisting = 'admin/user';
         $this->loginpage = 'admin/user/login';
     }
@@ -56,6 +58,8 @@ class User extends Admin_Controller{
         $this->data['subview'] = 'admin/user/edit';
         $this->load->view('admin/_layout_main', $this->data);
     }
+
+
     public function delete($id = NULL){
         $this->user_m->delete($id);
         redirect($this->userlisting);
@@ -63,8 +67,9 @@ class User extends Admin_Controller{
     }
     public function login(){
 
-        // Redirect a connected user
-        $this->user_m->loggedin() == false || redirect($this->dashboard) ;
+        // Redirect a connected user or log in
+        if ($this->user_m->loggedin() == false){
+
 
         //Set Form
         $rules = $this->user_m->rules;
@@ -75,8 +80,8 @@ class User extends Admin_Controller{
         if ($this -> form_validation -> run() == TRUE){
             //We can login and redirect
             if ($this->user_m->login() == true){
-                redirect($this->dashboard);
-            }
+                    $this->redirect_byusertype();
+                }
             else{
                 $this->session->set_flashdata('error', 'That email/password combination does not exist.');
                 redirect($this->loginpage, 'refresh');
@@ -86,7 +91,21 @@ class User extends Admin_Controller{
         //Load view
         $this->data['subview'] = 'admin/user/login';
         $this->load->view('admin/_layout_modal', $this ->data);
+        }
+        $this->redirect_byusertype();
     }
+
+    function redirect_byusertype(){
+            $user_data = $this->session->userdata;
+            console_log($user_data);
+            if ($user_data['type'] == "admin"){
+                redirect($this->dashboard);
+            }
+            else if ($user_data['type'] == "creator"){
+                redirect($this->creatordashboard);
+            }
+        }
+
 
     public function logout(){
         $this->user_m->logout();

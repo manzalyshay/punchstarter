@@ -15,11 +15,11 @@ class Dashboard extends Admin_Controller{
     }
 
     public function index(){
-        $this->data['subview'] = 'admin/dashboard/index';
-        $this->load->view('admin/_layout_main', $this ->data);
+        $this->data['subview'] = 'admin_creator/dashboard/index';
+        $this->load->view('admin_creator/_layout_main', $this ->data);
     }
 
     public function modal(){
-        $this->load->view('admin/_layout_modal', $this ->data);
+        $this->load->view('admin_creator/_layout_modal', $this ->data);
     }
 }

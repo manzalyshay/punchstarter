@@ -31,7 +31,7 @@ spl_autoload_register(function($classname) {
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:8888/';
+$config['base_url'] = 'http://localhost:8888/finalproject';
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +43,7 @@ $config['base_url'] = 'http://localhost:8888/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'finalproject';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -231,7 +231,7 @@ $config['allow_get_array'] = TRUE;
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 1;
 
 /*
 |--------------------------------------------------------------------------

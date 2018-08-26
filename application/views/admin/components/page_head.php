@@ -8,13 +8,31 @@
 
 <html>
 <head>
+<!--    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link href="<?php echo site_url('css/admin.css'); ?>" rel="stylesheet" media="screen">
+    <link href="<?php echo site_url('css/datepicker.css'); ?>" rel="stylesheet" media="screen">
+
+    <meta charset="UTF-8">
     <title><?php echo $meta_title; ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <!-- Bootstrap -->
     <link href="<?php echo site_url('css/bootstrap.min.css'); ?>" rel="stylesheet" media="screen">
-        <!-- TinyMCE -->
 
-        <script type="text/javascript" src="<?php echo site_url('js/tiny_mce/tiny_mce.js'); ?>"></script>
+    <script src="<?php echo site_url('js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo site_url('js/bootstrap-datepicker.js'); ?>"></script>
+
+
+    <?php if (isset($sortable) && $sortable === TRUE): ?>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="<?php echo site_url('js/jquery.mjs.nestedSortable.js'); ?>"></script>
+
+    <?php endif; ?>
+    <!-- TinyMCE -->
+
+    <script type="text/javascript" src="<?php echo site_url('js/tiny_mce/tiny_mce.js'); ?>"></script>
         <script type="text/javascript">
             tinyMCE.init({
                 // General options

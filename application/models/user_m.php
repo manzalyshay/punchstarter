@@ -6,9 +6,9 @@
  * Time: 12:58 AM
  */
 
-require_once APPPATH.'/core/Punch_model.php';
+require_once APPPATH.'/models/punch_model.php';
 
-class user_m extends Punch_model
+class user_m extends punch_model
 {
     protected $_table_name = 'users';
     protected $_order_by = 'name';
@@ -65,6 +65,7 @@ class user_m extends Punch_model
         $user -> email = '';
         $user -> type = '';
         $user -> password = '';
+        $user -> type = '';
         return $user;
 
     }

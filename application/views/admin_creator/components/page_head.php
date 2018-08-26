@@ -24,12 +24,6 @@
     <script src="<?php echo site_url('js/bootstrap-datepicker.js'); ?>"></script>
 
 
-    <?php if (isset($sortable) && $sortable === TRUE): ?>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-        <script src="<?php echo site_url('js/jquery.mjs.nestedSortable.js'); ?>"></script>
-
-    <?php endif; ?>
     <!-- TinyMCE -->
 
     <script type="text/javascript" src="<?php echo site_url('js/tiny_mce/tiny_mce.js'); ?>"></script>

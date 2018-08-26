@@ -14,23 +14,23 @@ class Project extends Admin_Controller{
     public function __construct()
     {
         parent::__construct();
-        $this->dashboard = 'admin/dashboard';
-        $this->projectlisting = 'admin/project';
+        $this->dashboard = 'admin_creator/dashboard';
+        $this->projectlisting = 'admin_creator/project';
         $this->loginproject = 'admin/user/login';
         $this->load->model('project_m');
     }
 
     public function index(){
         // Fetch all projects
-        $this->data['projects'] = $this->project_m->get();
+        console_log($this->session->userdata);
+        $this->data['projects'] = $this->project_m->getby_id($this->session->userdata('id'));
 
         //Load view
-        $this->data['subview'] = 'admin/project/index';
-        $this->load->view('admin/_layout_main', $this->data
+        $this->data['subview'] = 'admin_creator/project/index';
+        $this->load->view('admin_creator/_layout_main', $this->data
         );
 
     }
-
 
 
     public function edit($id = NULL)
@@ -51,15 +51,15 @@ class Project extends Admin_Controller{
         if ($this->form_validation->run() == TRUE) {
 
 
-                $data = $this->project_m->array_from_post(array('title', 'slug', 'body', 'pubdate', 'category', 'deadline', 'goal', 'posterurl'));
-                $this->project_m->save($data, $id);
+            $data = $this->project_m->array_from_post(array('title', 'slug', 'body', 'pubdate', 'category', 'deadline', 'goal', 'posterurl'));
 
+            $this->project_m->save($data, $id);
                 redirect($this->projectlisting);
             }
 
             // Load view
-            $this->data['subview'] = 'admin/project/edit';
-            $this->load->view('admin/_layout_main', $this->data);
+            $this->data['subview'] = 'admin_creator/project/edit';
+            $this->load->view('admin_creator/_layout_main', $this->data);
         }
 
     public function delete($id = NULL){

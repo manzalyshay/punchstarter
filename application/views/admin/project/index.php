@@ -1,36 +1,45 @@
 <!-- ///**
 // * Created by IntelliJ IDEA.
-// * page: shaym
+// * project: shaym
 // * Date: 8/7/18
 // * Time: 11:09 AM
 // */ -->
 <section>
-    <h2>Pages</h2>
-    <?php echo anchor('admin/page/edit', '<i class="icon-plus"></i>Add a page');?>
+    <h2>Projects</h2>
+    <?php echo anchor('admin/project/edit', '<i class="icon-plus"></i>Add a Project');?>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Title</th>
-            <th>Parent</th>
+            <th>Publish Date</th>
+            <th>Deadline</th>
+            <th>Goal</th>
+            <th>Backers</th>
+            <th>Pledged</th>
             <th>Edit</th>
             <th>Delete</th>
 
         </tr>
         </thead>
         <tbody>
-<?php if (count($pages)): foreach ($pages as $page): ?>
+<?php if (count($projects)): foreach ($projects as $project): ?>
         <tr>
 
-            <td><?php echo anchor('admin/page/edit/' . $page->id, $page->title); ?></td>
-            <td><?php echo $page->parent_slug; ?></td>
-            <td><?php echo btn_edit('admin/page/edit/'. $page->id); ?></td>
-        <td><?php echo btn_delete('admin/page/delete/'. $page->id); ?></td>
+            <td><?php echo anchor('admin/project/edit/' . $project->id, $project->title); ?></td>
+            <td><?php echo $project->pubdate; ?></td>
+            <td><?php echo $project->deadline; ?></td>
+            <td><?php echo $project->goal; ?></td>
+            <td><?php echo $project->backers; ?></td>
+            <td><?php echo $project->pledged; ?></td>
+
+            <td><?php echo btn_edit('admin/project/edit/'. $project->id); ?></td>
+        <td><?php echo btn_delete('admin/project/delete/'. $project->id); ?></td>
     </tr>
 <?php endforeach; ?>
 
 <?php else: ?>
         <tr>
-            <td colspan="3">We could not find any pages.</td>
+            <td colspan="3">We could not find any projects.</td>
         </tr>
         <?php endif; ?>
         </tbody>

@@ -6,7 +6,7 @@
 // */ -->
 <section>
     <h2>Projects</h2>
-    <?php echo anchor('admin/project/edit', '<i class="icon-plus"></i>Add a Project');?>
+    <?php echo anchor('admin_creator/project/edit', '<i class="icon-plus"></i>Add a Project');?>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -25,15 +25,15 @@
 <?php if (count($projects)): foreach ($projects as $project): ?>
         <tr>
 
-            <td><?php echo anchor('admin/project/edit/' . $project->id, $project->title); ?></td>
+            <td><?php echo anchor('admin_creator/project/edit/' . $project->id, $project->title); ?></td>
             <td><?php echo $project->pubdate; ?></td>
             <td><?php echo $project->deadline; ?></td>
             <td><?php echo $project->goal; ?></td>
             <td><?php echo $project->backers; ?></td>
             <td><?php echo $project->pledged; ?></td>
 
-            <td><?php echo btn_edit('admin/project/edit/'. $project->id); ?></td>
-        <td><?php echo btn_delete('admin/project/delete/'. $project->id); ?></td>
+            <td><?php echo btn_edit('admin_creator/project/edit/'. $project->id); ?></td>
+        <td><?php echo btn_delete('admin_creator/project/delete/'. $project->id); ?></td>
     </tr>
 <?php endforeach; ?>
 

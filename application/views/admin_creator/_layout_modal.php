@@ -5,7 +5,7 @@
  * Date: 8/7/18
  * Time: 11:09 AM
  */
-$this->load->view('admin/components/page_head'); ?>
+$this->load->view('admin_creator/components/page_head'); ?>
 
 
 <body style="background: #555555;">
@@ -21,5 +21,5 @@ $this->load->view('admin/components/page_head'); ?>
 
 
 
-<?php $this->load->view('admin/components/page_tail'); ?>
+<?php $this->load->view('admin_creator/components/page_tail'); ?>
 

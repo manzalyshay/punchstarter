@@ -13,5 +13,11 @@ class Frontend_Controller extends PunchstarterController{
     {
         parent::__construct();
 
+        //load stuff
+        $this->load->model('page_m');
+
+        //fetch navigation
+        $this->data['menu'] = $this->page_m->get_nested();
+        $this->data['projects_list_link'] = $this->page_m->get_list_link();
     }
 }

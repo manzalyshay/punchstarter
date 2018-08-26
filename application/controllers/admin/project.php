@@ -1,108 +1,76 @@
 <?php
 /**
  * Created by IntelliJ IDEA.
- * page: shaym
+ * project: shaym
  * Date: 8/7/18
  * Time: 4:37 PM
  */
 
-class Page extends Admin_Controller{
+class Project extends Admin_Controller{
     var $dashboard;
-    var $loginpage;
-    var $pagelisting;
+    var $loginproject;
+    var $projectlisting;
 
     public function __construct()
     {
         parent::__construct();
         $this->dashboard = 'admin/dashboard';
-        $this->pagelisting = 'admin/page';
-        $this->loginpage = 'admin/user/login';
-        $this->load->model('page_m');
+        $this->projectlisting = 'admin/project';
+        $this->loginproject = 'admin/user/login';
+        $this->load->model('project_m');
     }
 
     public function index(){
-        // Fetch all pages
-        $this->data['pages'] = $this->page_m->get_with_parent();
+        // Fetch all projects
+        $this->data['projects'] = $this->project_m->get();
 
         //Load view
-        $this->data['subview'] = 'admin/page/index';
+        $this->data['subview'] = 'admin/project/index';
         $this->load->view('admin/_layout_main', $this->data
         );
 
     }
 
-    public function order(){
-        $this->data['sortable'] = TRUE;
 
-        //Load view
-        $this->data['subview'] = 'admin/page/order';
-        $this->load->view('admin/_layout_main', $this->data
-        );
 
-    }
-
-    public function order_ajax(){
-        //save order
-        if (isset($_POST['sortable'])){
-            $this->page_m->save_order($_POST['sortable']);
+    public function edit($id = NULL)
+    {
+        // Fetch a project or set a new one
+        if ($id) {
+            $this->data['project'] = $this->project_m->get($id);
+            count($this->data['project']) || $this->data['errors'] = 'project could not be found';
+        } else {
+            $this->data['project'] = $this->project_m->get_new();
         }
-
-        // Fetch all pages
-        $this->data['pages'] = $this->page_m->get_nested();
-
-        //Load view
-        $this->load->view('admin/page/order_ajax', $this->data);
-    }
-
-
-    public function edit($id = NULL){
-        // Fetch a page or set a new one
-        if ($id){
-            $this->data['page'] = $this -> page_m -> get($id);
-            count($this->data['page']) || $this->data['errors'] = 'page could not be found';
-        }
-        else{
-            $this->data['page'] = $this->page_m->get_new();
-        }
-
-        //Pages for dropdown
-        $this -> data['pages_no_parents'] = $this->page_m->get_no_parents();
 
         // Set up the form
-        $rules = $this->page_m->rules;
+        $rules = $this->project_m->rules;
         $this->form_validation->set_rules($rules);
 
         //Process the form
-        if ($this -> form_validation -> run() == TRUE){
-            $data = $this->page_m->array_from_post(array('title', 'slug', 'body', 'parent_id'));
-            $this->page_m->save($data, $id);
-            redirect($this->pagelisting);
+        if ($this->form_validation->run() == TRUE) {
+
+
+                $data = $this->project_m->array_from_post(array('title', 'slug', 'body', 'pubdate', 'category', 'deadline', 'goal', 'posterurl'));
+                $this->project_m->save($data, $id);
+
+                redirect($this->projectlisting);
+            }
+
+            // Load view
+            $this->data['subview'] = 'admin/project/edit';
+            $this->load->view('admin/_layout_main', $this->data);
         }
 
-        // Load view
-        $this->data['subview'] = 'admin/page/edit';
-        $this->load->view('admin/_layout_main', $this->data);
-    }
     public function delete($id = NULL){
-        $this->page_m->delete($id);
-        redirect($this->pagelisting);
+        $this->project_m->delete($id);
+        redirect($this->projectlisting);
 
     }
 
 
-    public function _unique_slug($str){
-        //Do not validate if the slug already exists
-        //Unless it's the slug of the current page
 
-        $id = $this->uri->segment(4);
-        $this->db->where('slug', $this->input->post('slug'));
-        !($id) || $this->db->where('id != ', $id);
-        $page = $this->page_m->get();
 
-        if (count($page)){
-            $this->form_validation->set_message('_unique_slug', '%s should be unique.');
-            return FALSE;
-        }
-        return TRUE;
-    }
+
+
 }

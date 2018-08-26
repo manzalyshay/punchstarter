@@ -30,9 +30,9 @@
             <td>
                 <?php
                 $options = array(
-                    'Backer' => 'Backer',
-                    'Entrepreneur' => 'Entrepreneur',
-                    'Admin' => 'Admin');
+                    'backer' => 'Backer',
+                    'creator' => 'Creator',
+                    'admin' => 'Admin');
 
                 echo form_dropdown('type', $options, set_value('type', $user->type) );
                      ?>

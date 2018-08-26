@@ -6,16 +6,14 @@
  * Time: 12:05 AM
  */
 
-class Migration_Parent_id_to_pages extends CI_Migration {
+class Migration_add_template_to_pages extends CI_Migration {
 
     public function up()
     {
      $fields = (array(
-            'parent_id' => array(
-                'type' => 'INT',
-                'constraint' => 11,
-                'unsigned' => TRUE,
-                'default' => 0
+            'template' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 25,
             ),
         ));
         $this->dbforge->add_column('pages', $fields);
@@ -23,6 +21,6 @@ class Migration_Parent_id_to_pages extends CI_Migration {
 
     public function down()
     {
-        $this->dbforge->drop_column('pages', 'parent_id');
+        $this->dbforge->drop_column('pages', 'template');
     }
 }
